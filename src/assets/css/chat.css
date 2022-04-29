@@ -38,7 +38,7 @@ main{
 
 .row{
     width:100%;
-    height: calc(100vh - 155px);
+    height: calc(100vh - 135px);
 }
 
 .esys-aba{
@@ -401,7 +401,7 @@ main{
 
 #chat-area{
     position:fixed;
-    width:calc(100vw - 340px);
+    width:calc(100vw - 339px);
     left:336px;
     z-index: 0;
 }
@@ -416,7 +416,7 @@ main{
     padding-left:25px;
     padding-right:25px;
     width: 100%;
-    height: calc(100vh - 190px);
+    height: calc(100vh - 180px);
     overflow: auto;
     
 }
@@ -442,6 +442,9 @@ main{
     font-size:10pt;
     margin-top: 5px;
     border-radius: 50px;
+    padding-left:20px;
+    height: 50px;
+    padding-bottom: 10px;
 }
 
 .popover-area{
@@ -522,7 +525,7 @@ main{
     width:350px;
     margin-left: 0px;
     border-right:1px solid #ccc;
-    height: calc(100vh - 140px) !important;
+    height: calc(100vh - 129px) !important;
     padding: 5px 0px 0px 0px;
     background: #fff;
 }
