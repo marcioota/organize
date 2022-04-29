@@ -20,7 +20,7 @@
                                 <div class="mini-menu-item-grp">
                                         <div class="mini-menu-item-cell">
                                             <router-link to="/Painel" >
-                                            <img src="../assets/imgs/foguete2.png" class="icone-foquete-2 mini-menu-item-cell"> 
+                                            <img src="../assets/imgs/foguete2.png" class="icone-foquete-2"> 
                                             <small> Painel</small>
                                             </router-link>
                                         </div>
