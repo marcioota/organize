@@ -58,7 +58,7 @@ main{
 /* SEARCH BOX */
 .search-box{
     background:white;
-    margin-left:25px;
+    margin-left:32px;
     margin-right:11px;
     border-radius: 25px;
     padding: 0px 6px 1px 1px;
@@ -292,8 +292,8 @@ main{
     background-image: url('../imgs/bico.png');
     background-repeat: no-repeat;
     top:111px;
-    width:30px;
-    left: calc(100vw - 52px);
+    width:250px;
+    left: calc(100vw - 70px) !important;
     height: 10px !important;
     z-index: 2;
     display: none;
@@ -340,7 +340,7 @@ main{
 
 #btn-finance svg{
     margin-top:5px;
-    height: 30px;
+    height: 23px;
     width: 30px;
 }
 
@@ -361,7 +361,7 @@ main{
     display: flex;
     height: 60px;
     border-bottom: 1px solid #ccc;
-    margin-left: 22px;
+    margin-left: 24px;
     margin-right: 10px;
     flex-direction: row !important;
 }
@@ -401,10 +401,16 @@ main{
 
 #chat-area{
     position:fixed;
-    width:calc(100vw - 350px);
+    width:calc(100vw - 340px);
     left:336px;
     z-index: 0;
 }
+
+#chat-area div{
+    scrollbar-color: rebeccapurple green;
+
+}
+
 #chat-area-msgs{
     background-color: white;
     padding-left:25px;
@@ -412,6 +418,7 @@ main{
     width: 100%;
     height: calc(100vh - 190px);
     overflow: auto;
+    
 }
 #chat-area-msgs-send{
     background-color: var(--color-cinza);
@@ -489,6 +496,7 @@ main{
 }
 #menu-chat-1-1, #menu-chat-2-1{
     margin-top: 1px;
+    margin-left: 4px;
     width:340px;
     height: 50px;
     border-right:1px solid #ccc;
@@ -533,7 +541,7 @@ main{
 /*  CLIENT-PROFILE */
 #client-profile{
     display: flex;
-    width:200px;
+    width:300px;
     border:0px solid red;
 
 }
@@ -551,6 +559,11 @@ main{
     border-radius: 50%;
     top: 2px;
     margin-left: 10px;
+
+}
+#client-profile b{
+    color: black !important;
+    font-size:10pt !important;
 
 }    
 
@@ -575,18 +588,21 @@ main{
 }
 
 #botoes-genericos{
-    width:40%;
+    width:35%;
     height: 35px;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
     white-space: nowrap;
-    justify-content: space-between;
+    justify-content:flex-start;
     margin-right: 10px;
     min-width:250px;
     z-index:343020343;
 }
 
+#botoes-genericos .combo-like-grp{
+    margin:10px;
+}
 #botoes-genericos-v{
     position: fixed;;
     left: 550px;
@@ -605,8 +621,9 @@ main{
 }
 
 #botoes-extras{
-    width:400px;
+    width:350px;
     height: 35px;
+    margin-right: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -665,3 +682,18 @@ main{
 
 }
 
+.form-control:focus, input[type=text]:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+  } 
+
+  .form-control, input[type=text] {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+  } 
+
+  textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 

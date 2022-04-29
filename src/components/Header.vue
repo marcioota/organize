@@ -87,6 +87,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 header{
     background-color: var(--color-cabecalho-azul);
     width: 100%;
@@ -115,7 +117,7 @@ nav{
     width: 150px;
     position: fixed;
     top: 3px;
-    left:30px;
+    left:5px;
 }
 
 #menu-btn{
@@ -183,7 +185,7 @@ nav{
     flex-direction: row;
     top:0;
     width: 100px;
-    left:80px;
+    left:70px;
     height: 8vh;
     align-items: center;
     border: 0px solid red;

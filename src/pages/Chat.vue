@@ -113,7 +113,7 @@
                         <div class="combo-like-lista" id="segmentos_lista">
                             <p class="search-box-mini">
                                 <i class="bi bi-search"></i>
-                                <input type="text" class="form-control" placeholder="Pesquisar grupo">
+                                <input type="text" class="" placeholder="Pesquisar grupo">
                             </p>
                             <p><input type="checkbox" name="" id=""> Interessando em Batmóvel</p>
                             <p><input type="checkbox" name="" id=""> Interessando em Netflix</p>
@@ -456,9 +456,8 @@ export default {
                 btn_genericos.style.minWidth="0";
                 menu_chat.style.width="calc(100% - 360px)";
                 chat_area.style.width="calc(100vw - 700px)";
-                comboLike_bicoDir.style.left="calc(100vw - 407px)";
-                comboLike_listaDir.style.left="calc(100vw - 620px)";
-
+                comboLike_bicoDir.style.left="calc(100vw - 490px)";
+                comboLike_listaDir.style.left="calc(100vw - 670px)";
                 btn_genericos_v.style.display="flex";
 
                 listaLojas_bico_v.style.display="none";
@@ -485,8 +484,8 @@ export default {
             }else{
                 menu_chat.style.width="100%";
                 chat_area.style.width="calc(100vw - 350px)";
-                comboLike_bicoDir.style.left="calc(100vw - 52px)";
-                comboLike_listaDir.style.left="calc(100vw - 270px)";
+                comboLike_bicoDir.style.left="calc(100vw - 70px)";
+                comboLike_listaDir.style.left="calc(100vw - 290px)";
                 btn_genericos.style.minWidth="250px";
                 btn_genericos_v.style.display="none";
 
