@@ -456,8 +456,8 @@ export default {
                 btn_genericos.style.minWidth="0";
                 menu_chat.style.width="calc(100% - 360px)";
                 chat_area.style.width="calc(100vw - 700px)";
-                comboLike_bicoDir.style.left="calc(100vw - 490px)";
-                comboLike_listaDir.style.left="calc(100vw - 670px)";
+                comboLike_bicoDir.style.left="calc(100vw - 430px)";
+                comboLike_listaDir.style.left="calc(100vw - 650px)";
                 btn_genericos_v.style.display="flex";
 
                 listaLojas_bico_v.style.display="none";
