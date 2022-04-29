@@ -20,7 +20,7 @@
                                 <div class="mini-menu-item-grp">
                                         <div class="mini-menu-item-cell">
                                             <router-link to="/Painel" >
-                                            <i class="bi bi-graph-up"></i> 
+                                            <img src="../assets/imgs/foguete2.png" class="icone-foquete-2 mini-menu-item-cell"> 
                                             <small> Painel</small>
                                             </router-link>
                                         </div>
@@ -48,6 +48,7 @@
                     </div>
                 </div>
                 <div id="user-profile">
+                    <i class="bi bi-chevron-down"></i>
                     <img src="../assets/imgs/users/114.jpg" class="user-profile-img" >
                 </div>
             </div>
@@ -145,11 +146,16 @@ nav{
     background-color: var(--color-cabecalho-azul);
     height: 100vh;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: right;
+    border:0px solid red; 
 }
 #btn-show-hide-main-menu{
-    height: 20px;
+    padding-top: 5px;
+    height: 30px;
+    border:0px solid red; 
+    width: 80px;
+    text-align: right;
 }
 
  
@@ -164,7 +170,7 @@ nav{
 
 #menu-right{
     position: fixed;
-    width: 200px;
+    width: 50px;
     display: flex;
     border: 0px solid red;
     left: calc(100vw - 200px) !important;
@@ -173,13 +179,25 @@ nav{
 
 #user-profile{
     position: relative;
+    display: flex;
+    flex-direction: row;
     top:0;
-    width: 10%;
+    width: 100px;
     left:80px;
     height: 8vh;
-    flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    border: 0px solid red;
+    
+}
+
+#user-profile i{
+    font-size: 10pt;
+    margin-right: 10px;
+}
+
+#user-profile img{
+    width:40px;
+    height:40px;
 }
 
 #menu-show-hide{
@@ -203,7 +221,7 @@ input +.drop-mini +  div
 }
 
 .mini-menu{
-    width:60px;
+    width:40px;
     padding-top: -13px;
     z-index: 1;
 }
@@ -223,7 +241,7 @@ input +.drop-mini +  div
     width:173px;
     height: 155px;
     border: 0px solid red;
-    left:-77px;
+    left:-25px;
     top:-5px;
     position:relative;
     border-radius: 5px;
@@ -249,7 +267,7 @@ input +.drop-mini +  div
     text-align: center;
 }
 .mini-menu-item-cell i{
-   color: var(--color-mini-menu-roxo) !important;
+   color: var(--color-roxo) !important;
    font-size: 15pt;
 
 }

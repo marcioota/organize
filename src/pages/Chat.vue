@@ -31,7 +31,7 @@
                 </div>        
                 <div id="chat-area-msgs-send">
                     <a href="#4" id=""><i class="bi bi-emoji-smile"></i></a>
-                    <a href="#4" id=""><i class="bi bi-cursor-fill"></i></a>
+                    <a href="#4" id=""><img src="../assets/imgs/iconefoguete.png" class="icone-foguete"></a>
                     <a href="#4" id=""><i class="bi bi-paperclip"></i></a>
                     
                     <textarea name="" id="" cols="30" class="form-control" rows="2"></textarea>
@@ -65,8 +65,8 @@
 <!-- 3 DROPDOWN LOJAS, SEGMENTACAO E FUNIL TELA MINIMA -->
                 <div id="botoes-genericos-v" >
                     <a href="#1">
-                        <div class="combo-like-grp" id="btn_lista_v" >
-                            <i style='font-size:20pt;cursor:pointer' class="bi bi-info-circle"   @click="SH_lista_lojas_v" ></i>
+                        <div class="combo-like-grp" id="btn_lista_v" @click="SH_lista_lojas_v" >
+                            <i style='font-size:20pt;cursor:pointer' class="bi bi-info-circle" ></i>
                         </div>
                      </a>
                      <div class="combo-like-bico-v" id="lista_lojas_bico_v">
@@ -166,7 +166,7 @@
                     </div>
                     <a href="#1" class="btn-small" id="btn-show-seach-lado-direito" @click="showSearchLadoDireito"><i class="bi bi-search"></i></a>
     <!--BOTAO TELEFONE  -->  
-                    <a href="#1" class="btn-small" id=""><i class="bi bi-telephone-fill"></i></a>
+                    <a href="#1" class="btn-small" id=""><img class='icone-telefone' src="../assets/imgs/iconetelefone.png"></a>
 
 
 <!--MENU DIREITO  -->
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                     <div class="combo-like-grp opcoes-grp-chat">
-                        <div class="search-box border-dark-blue">
+                        <div class="search-box ">
                             <i class="bi bi-search"></i>
                             <input type="text" class="form-control" placeholder="Procura conversa">
                         </div>
@@ -302,6 +302,7 @@ export default {
                 height_bico="0";
                 height_linha="0";
             }
+
             lista.style.opacity=.1;
             bico.style.display=showhide;
             lista.style.display=showhide;

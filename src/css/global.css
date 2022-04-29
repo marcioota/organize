@@ -7,6 +7,20 @@
     --color-text-dark:#3D3D3D;
     --color-cabecalho-azul: #312f52;
     --color-mini-menu-roxo: #5d57b7;
+
+    --color-verde-escuro: #81b988;
+    --color-roxo: #5d57b7;
+    --color-roxo-claro: #d2c7f2;
+    --color-roxo-claro-2: #ebebfe;
+    --color-preto: #2b2b2c;
+    --color-fundo: #fafafc;
+    --color-amarelo: #f6d180;
+    --color-amarelo-claro: #fdf4df;
+    --color-vermelho: #c64d4d;
+    --color-vermelho-claro: #fad1d0;
+    --color-verde: #2f9f9f;
+    --color-verde-claro: #ccffff;
+    --color-cinza: #eaeaea;
   }
 
   *{

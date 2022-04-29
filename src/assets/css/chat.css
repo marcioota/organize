@@ -59,21 +59,23 @@ main{
 .search-box{
     background:white;
     margin-left:25px;
-    margin-right:1px;
+    margin-right:11px;
     border-radius: 25px;
     padding: 0px 6px 1px 1px;
     display: flex;
     flex-direction: row;
     height: 35px;
+    border: 1px solid var(--color-roxo);
 
 }
 
 .search-box input{
     font-size:9pt;
     width: 80%;
+    color: var(--color-roxo-claro)
 }
 .search-box i{
-    color: #888;
+    color: var(--color-roxo) !important;
     padding: 5px 5px 5px 5px;
     position: relative;
     top:-2px;
@@ -333,7 +335,7 @@ main{
 
 #filtro-chats{
     position: relative;
-    top:-4px;
+    top:-6px;
 }
 
 #btn-finance svg{
@@ -350,7 +352,7 @@ main{
     border-bottom: 1px solid #eee;
 }
 .border-dark-blue{
-    border:1px solid darkblue;
+    border:1px solid var(---color-roxo-claro-2);
     
 }
 
@@ -412,7 +414,7 @@ main{
     overflow: auto;
 }
 #chat-area-msgs-send{
-    background-color: var(--color-background);
+    background-color: var(--color-cinza);
     height: 60px;
     display: flex;
     padding-left:40px;
@@ -432,6 +434,7 @@ main{
 #chat-area-msgs-send textarea{
     font-size:10pt;
     margin-top: 5px;
+    border-radius: 50px;
 }
 
 .popover-area{
@@ -471,7 +474,7 @@ main{
     top:60px;
     width:100%;
     height: 50px;
-    background: var(--color-background);
+    background: var(--color-cinza);
     display: flex;
     justify-content: space-between;
     border: 1px solid #aaa;
@@ -559,7 +562,9 @@ main{
     top:-5px;
 }
 .btn-small{
-    padding: 5px 15px 5px 5px;
+    position: relative;
+    top: -1px;
+    padding: 0px 5px 0px 5px;
     color: #888;
 }
 
@@ -611,6 +616,12 @@ main{
     border:0px solid red;
 }
 
+#btn_lista_v .bi{
+    color: var(--color-roxo);
+    position: relative;
+    top:-5px;
+}
+
 .badge{
     text-align: center;
     background: rgb(247, 226, 226);
@@ -631,3 +642,26 @@ main{
 #pop-over-financeiro .popover-header{
     background: darkgreen;
 }
+
+
+.icone-telefone{
+    margin-top: 8px;
+    background: url(../imgs/iconetelefone.png);
+    width: 40px;
+}
+
+.icone-foguete{
+    margin-top: 0px;
+    width: 30px;
+
+}
+
+.icone-foquete-2{
+    margin-top: 0px;
+    position: relative;
+    left: -0px;
+    width: 45px !important;
+    height: 32px !important;
+
+}
+
