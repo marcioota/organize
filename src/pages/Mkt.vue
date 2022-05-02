@@ -31,7 +31,13 @@ export default {
   url: 'http://192.168.0.11:6001/arcadia/clientesFree'
 })
   .then(function(response) {
-    alert(response.data.rows[1].nome)
+    var i=response.data.rows.length;
+    var f;
+    for(f=0;f<i;f++){
+      alert(response.data.rows[f].nome);
+    }
+    
+    
 
 });
 

@@ -141,14 +141,6 @@ main{
     vertical-align: middle;
 }
 
-.combo-like-lista input[type=checkbox]{
-    height: 20px;
-    width: 20px;
-    vertical-align: middle;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
 .combo-like-lista hr, .combo-like-lista-menu-chat hr, .combo-like-lista-dir hr{
     margin-top: 0px;
     margin-bottom: 0px;
@@ -213,21 +205,28 @@ main{
 
 }
 .combo-like-lista-v{
+    display: none;
+    opacity: 0;
     position: fixed;
-    background: white;    
+    flex-direction: column-reverse !important;
     border: 1px solid #333;
     top:111px;
     width:160px;
     left:461px;
+    background: white;
     min-height: 130px;
     border-radius: 15px;
     box-shadow: 3px 7px 10px rgba(3, 3, 3, 0.3);
     font-size: 10pt;
-    padding: 5px 5px 5px 15px;
+    padding: 5px 5px 15px 10px;
     transition: visibility 0s, height 14s, opacity 0.5s linear ;
     
 }
-
+.combo-like-lista-v .dropdown-like-grp {
+    position: relative;
+    top: 5px;
+    margin-bottom: 5px;
+}
 #combo-like-grp-lojas{
     display: flex;
     position: inherit;
@@ -260,18 +259,99 @@ main{
     margin-top:10px;
 }
 
-.combo-like-bico-menu-chat{
+
+/*DROPDOWNS*/
+
+
+.dropdown-body{
     position: fixed;
+    display: none;
+    opacity: 1;
+    flex-direction: column;
+    align-items: center;
+    border:0px solid red;
+    transition: visibility 0s, height 14s, opacity 0.3s linear !important;
+}
+
+.dropdown-bico{
+    position: relative;
     border:0px solid red;
     background-image: url('../imgs/bico.png');
     background-repeat: no-repeat;
-    top:224px;
-    width:30px;
-    height: 10px !important;
-    z-index: 2;
-    display: none;
-
+    top:0px;
+    left: 4px;
+    width:50px;
+    height: 13px !important;
+    z-index: 1;
 }
+
+.dropdown-conteudo{
+    position: relative;
+    border:1px solid blue;
+    border-radius: 5px;
+    padding: 5px;
+    top:-1px;
+    z-index: 0;
+    box-shadow: 3px 7px 10px rgba(3, 3, 3, 0.3);
+    font-size: 10pt !important;
+    padding-bottom:12px;
+    background: white;
+}
+
+.dropdown-conteudo h6{
+    margin-top: 10px;
+}
+.dropdown-conteudo hr{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.dropdown-conteudo div{
+    padding:5px 5px 5px 5px ;
+    cursor: pointer;
+}
+
+.dropdown-conteudo input[type=checkbox]{
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.drop-btn{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size:10pt;
+    text-align: center;
+    padding:0px 20px 0px 20px;
+    margin-right:20px;
+}
+
+.drop-btn label{
+    position: relative;
+    top:6px;
+}
+
+.drop-btn i{
+    position: relative;
+    top:6px;
+    font-size:10pt;
+    margin-left:5px;
+    margin-right:15px;
+}
+
+.dropdown-conteudo div:hover{
+    
+    background: #ccc;
+}
+
+#drop_filtro_lista{
+    left:225px;
+}
+
 
 .combo-like-lista-menu-chat{
     position: fixed;
@@ -333,10 +413,6 @@ main{
     font-size: 18pt;
 }
 
-#filtro-chats{
-    position: relative;
-    top:-6px;
-}
 
 #btn-finance svg{
     margin-top:5px;
@@ -526,9 +602,51 @@ main{
     margin-left: 0px;
     border-right:1px solid #ccc;
     height: calc(100vh - 129px) !important;
-    padding: 5px 0px 0px 0px;
-    background: #fff;
+    padding: 5px 0px 50px 15px;
+    
 }
+
+.contato-profile-list{
+    display: flex;
+    flex-direction: row;
+    border:0px solid red;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+}
+
+.contato-profile-list.active{
+    background: var(--color-roxo-claro-2);
+}
+
+.contato-profile-info{
+    border:0px solid blue;
+    padding-top: 10px;
+    margin-left:20px;
+    width:100%;
+}
+.contato-profile-foto img {
+    position: relative;
+    height: 65px;
+    border-radius: 50%;
+    top: 2px;
+    margin-left: 0px;
+}
+
+.contato-profile-nome {
+    font-size:12pt;
+    font-weight: 600;
+}
+
+.contato-profile-fone {
+    font-size:10pt;
+    color: #888;
+}
+
+.contato-profile-status{
+    font-size:10pt;
+    color:var(--color-roxo);
+}
+
 #area-contatos{
     width:332px;
     margin-left: 18px;

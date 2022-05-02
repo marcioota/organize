@@ -1,82 +1,68 @@
 <template>
-  <div>
-      <h1>CRM</h1>
-    <ul 
-      class="test-list" 
-      v-for="todo in todosList" 
-      :key="todo.id"
-    >
-    <h1>sasaas</h1>
-      <li class="test-list--item">
-        {{ todo.id }}
-      </li>
-    </ul>
-  </div>
+    <main>
+        <section class="container">
+            <h1>CRM</h1>
+            <section class="classe-contatos" v-for="(rows, idn) in rows" :key="idn"> 
+                <div class="contato-title">{{ rows.idn }}</div>
+                <div class="contato-title">{{ rows.nome }}</div>
+                <div class="contato-title">{{ rows.img }}</div>
+
+            </section>
+        </section>
+    </main>
 </template>
 
-<script>
-        const axios = require("axios");
-        const Promise = require("bluebird");
-        const getJson = require("axios-get-json-response");
+<script >
+import axios from "axios";
+//import api from '@/services/api.js';
+
+var $user_idn=44;
 
 export default {
-  data() {
-    return {
-      todosList: []
-    };
-  },
-  mounted() {
+    data(){
+        return{
+            rows: []
+        }
+    },
+    async mounted(){
+            axios({
+                method: 'post',
+                url: 'http://192.168.0.11:6001/wapp/contatos?idn='+$user_idn+'&fiativo=',
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then((response) => {
+               this.rows = response.data.rows;
+            });
 
-        Promise.try(() => {
-            return axios.post("http://192.168.0.11:6001/arcadia/clientesFree", getJson.axiosConfiguration); // {"hello": "world"}
-        }).then((response) => {
-            alert('parsedJson')
-            let parsedJson = getJson.parse(response);
-            console.log(parsedJson); // { hello: 'world' }
+/*
+        api.get('/contacts.json').then(
+            response => {
+                this.contatos = response.data;
         });
 
-  }
-};
 
-
+*/
+    }
+}
 </script>
 
-<style>
-.test-list {
-  font-family: Roboto;
-  list-style: none;
-  margin: 20px auto;
-  width: 50%;
+<style scoped>
+main{
+    align-items: center;
+    padding: 20px;
 }
 
-.test-list--item {
-  border: 1px solid rgb(41, 41, 41);
-  border-radius: 5px;
-  text-align: center;
-  display: block;
-  box-shadow: 2px 2px rgba(138, 124, 124, 0.4);
+.classe-contatos{
+    margin-bottom: 30px;
+    color: var (--color-text-dark);
 }
 
-.test-list--id {
-  font-weight: 300;
-  margin: 10px auto;
+.contact-title{
+    font-weight: 800;
+    font-size:18px;
 }
 
-.test-list--title {
-  font-weight: 500;
-  margin: 20px auto;
-  text-transform: capitalize;
-}
-
-.test-list--complete {
-  font-weight: 600;
-  margin: 10px auto;
-  color: #56ca86;
-}
-
-.test-list--incomplete {
-  font-weight: 600;
-  margin: 10px auto;
-  color: #ca5656;
+.contact a{
+    margin-bottom: 20px;
 }
 </style>

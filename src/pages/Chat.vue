@@ -41,28 +41,29 @@
 
         <div id="menu-chat">
             <div id="menu-chat-1-1">
-                <a class="esys-aba active">
+                <a class="esys-aba active" @click="wapp_load_contatos('ativo');wapp_muda_aba(0)">
                     Caixa de Entrda
                     <span class="aviso-orange">2</span>
                 </a>
-                <a class="esys-aba">
+                <a class="esys-aba"  @click="wapp_load_contatos('');wapp_muda_aba(1)">
                     Todos os Contatos
+                    <span class="aviso-orange">3</span>
                 </a>
             </div>
             <div class="main-chat-header">
                 <div id="menu-chat-1-2">
                     <div id="client-profile">
-                        <img src="../assets/imgs/users/116.jpg" class="client-profile-img" >
+                        <img src="../assets/imgs/users/116.jpg" class="client-profile-img" id="current-contato-img" >
                         <div>
-                            <b>Ana Margarida</b>
-                            <p>+55 11 99999-9999</p> 
+                            <b id="current-contato-nome">Ana Margarida</b>
+                            <p id="current-contato-fone">+55 11 99999-9999</p> 
                         </div>
                     </div>
 
                 </div>
 
 
-<!-- 3 DROPDOWN LOJAS, SEGMENTACAO E FUNIL TELA MINIMA -->
+<!-- DROPDOWN VERTICAL LOJAS, SEGMENTACAO E FUNIL TELA MINIMA -->
                 <div id="botoes-genericos-v" >
                     <a href="#1">
                         <div class="combo-like-grp" id="btn_lista_v" @click="SH_lista_lojas_v" >
@@ -73,44 +74,38 @@
                         &nbsp;
                      </div>
                       <div class="combo-like-lista-v" id="lista_lojas_lista_v">
-                      </div>
 
-                </div>
-
-
-<!-- 3 DROPDOWN LOJAS, SEGMENTACAO E FUNIL -->
-                <div id="botoes-genericos">
-
-
-<!-- 3 DROPDOWN FUNIL -->
-                    <div class="combo-like-grp" @click="SH_funil"  id="combo-like-grp-funil">
-                        <div class="combo-like creme">
-                            <label>Prospecção</label>
-                            <i class="bi bi-chevron-down"></i>
+<!-- DROPDOWN VERTICAL LOJAS-->
+                        <div class="dropdown-like-grp" @click="SH_show_hide('drop_funil_v')" >
+                            <div class="drop-btn creme" >
+                                <label>Prospecção</label>
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-body" id="drop_funil_v">
+                                <div class="dropdown-bico" id="bico-menu-1">
+                                </div>
+                                <div class="dropdown-conteudo" id="bico-content-1">
+                                    <div>Prospecção</div><hr>
+                                    <div>Prosposta enviada</div><hr>
+                                    <div>Negociação</div><hr>
+                                    <div>Prosposta aceita</div><hr>
+                                    <div>Venda concluída</div><hr>
+                                    <div>Perdido</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="combo-like-bico" id="funil_bico">
-                            &nbsp;
-                        </div>
-                        <div class="combo-like-lista" id="funil_lista">
-                            <div>Prospecção</div><hr>
-                            <div>Prosposta enviada</div><hr>
-                            <div>Negociação</div><hr>
-                            <div>Prosposta aceita</div><hr>
-                            <div>Venda concluída</div><hr>
-                            <div>Perdido</div>
-                        </div>
-                    </div>
-                    
-<!-- 3 DROPDOWN SEGMENTACAO  -->
-                    <div class="combo-like-grp" id="combo-like-grp-segmentos">
-                        <div class="combo-like roxo-claro" @click="SH_segmentos">
+
+
+<!-- DROPDOWN VERTICAL SEGMENTACAO  -->
+                    <div class="dropdown-like-grp">
+                        <div class="drop-btn roxo-claro"  @click="SH_show_hide('drop_segmentacao_v')" >
                             <label>Segmentações</label>
                             <i class="bi bi-chevron-down"></i>
                         </div>
-                        <div class="combo-like-bico" id="segmentos_bico">
-                            &nbsp;
-                        </div>
-                        <div class="combo-like-lista" id="segmentos_lista">
+                        <div class="dropdown-body" id="drop_segmentacao_v">
+                            <div class="dropdown-bico" id="bico-menu-1">
+                             </div>
+                             <div class="dropdown-conteudo" id="bico-content-1">
                             <p class="search-box-mini">
                                 <i class="bi bi-search"></i>
                                 <input type="text" class="" placeholder="Pesquisar grupo">
@@ -119,29 +114,105 @@
                             <p><input type="checkbox" name="" id=""> Interessando em Netflix</p>
                             <p><input type="checkbox" name="" id=""> Querendo Havaianas</p>
                             <p><input type="checkbox" name="" id=""> Buscando Passagens</p>
+                            </div>
+                                
+                        </div>
+                    </div>
+
+<!-- DROPDOWN VERTICAL LOJAS-->
+                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_lojas_v')" >
+                        <div class="drop-btn verde-claro" >
+                            <label>Loja A</label>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-body" id="drop_lojas_v">
+                            <div class="dropdown-bico" id="bico-menu-1">
+                             </div>
+                             <div class="dropdown-conteudo" id="bico-content-1">
+                                <div>Loja B</div>
+                                <div>Loja C</div>
+                                <div>Loja D</div>
+                                <div>Loja E</div>
+                            </div>
+                                
+                        </div>
+                    </div>
+
+                      </div>
+
+                </div>
+
+
+<!-- DROPDOWN HORIZONTAL LOJAS, SEGMENTACAO E FUNIL -->
+                <div id="botoes-genericos">
+
+
+<!-- 3 DROPDOWN FUNIL -->
+                    
+                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_funil')" >
+                        <div class="drop-btn creme" >
+                            <label>Prospecção</label>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-body" id="drop_funil">
+                            <div class="dropdown-bico" id="bico-menu-1">
+                             </div>
+                             <div class="dropdown-conteudo" id="bico-content-1">
+                                <div>Prospecção</div><hr>
+                                <div>Prosposta enviada</div><hr>
+                                <div>Negociação</div><hr>
+                                <div>Prosposta aceita</div><hr>
+                                <div>Venda concluída</div><hr>
+                                <div>Perdido</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+<!-- 3 DROPDOWN SEGMENTACAO  -->
+                    <div class="dropdown-like-grp">
+                        <div class="drop-btn roxo-claro"  @click="SH_show_hide('drop_segmentacao')" >
+                            <label>Segmentações</label>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <div class="dropdown-body" id="drop_segmentacao">
+                            <div class="dropdown-bico" id="bico-menu-1">
+                             </div>
+                             <div class="dropdown-conteudo" id="bico-content-1">
+                            <p class="search-box-mini">
+                                <i class="bi bi-search"></i>
+                                <input type="text" class="" placeholder="Pesquisar grupo">
+                            </p>
+                            <p><input type="checkbox" name="" id=""> Interessando em Batmóvel</p>
+                            <p><input type="checkbox" name="" id=""> Interessando em Netflix</p>
+                            <p><input type="checkbox" name="" id=""> Querendo Havaianas</p>
+                            <p><input type="checkbox" name="" id=""> Buscando Passagens</p>
+                            </div>
+                                
                         </div>
                     </div>
 
 
 <!-- 3 DROPDOWN LOJAS-->
-                    <div class="combo-like-grp" @click="SH_lista_lojas" id="combo-like-grp-lojas">
-                        <div class="combo-like verde-claro" >
+                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_lojas')" >
+                        <div class="drop-btn verde-claro" >
                             <label>Loja A</label>
                             <i class="bi bi-chevron-down"></i>
                         </div>
-                        <div class="combo-like-bico" id="lista_lojas_bico">
-                            &nbsp;
-                        </div>
-                        <div class="combo-like-lista" id="lista_lojas_lista">
-                            <div>Loja B</div>
-                            <div>Loja C</div>
-                            <div>Loja D</div>
-                            <div>Loja E</div>
+                        <div class="dropdown-body" id="drop_lojas">
+                            <div class="dropdown-bico" id="bico-menu-1">
+                             </div>
+                             <div class="dropdown-conteudo" id="bico-content-1">
+                                <div>Loja B</div>
+                                <div>Loja C</div>
+                                <div>Loja D</div>
+                                <div>Loja E</div>
+                            </div>
+                                
                         </div>
                     </div>
 
                     
-                </div>
+            </div>
 
 
 
@@ -224,25 +295,38 @@
                             <i class="bi bi-search"></i>
                             <input type="text" class="form-control" placeholder="Procura conversa">
                         </div>
-                        <a href="#1" class="btn-small" id=""><img src="../assets/imgs/add-contato.png"></a>
-                        <i class="bi bi-sun-fill" style="color:black;font-size:20pt"></i>
 
-                        <div class="combo-like-grp" @click="SH_filtro">
+                        <a href="#1" class="btn-small" id=""><img src="../assets/imgs/add-contato.png"></a>
+                                    
+                        <div class="dropdown-like-grp" @click="SH_show_hide('drop_filtro_lista')" >
                             <a href="#1" class="btn-small" id="filtro-chats"><img src="../assets/imgs/segmentacao.png"></a>
-                            <div class="combo-like-bico-menu-chat" id="filtro_bico">
-                                &nbsp;
-                            </div>
-                            <div class="combo-like-lista-menu-chat"  id="filtro_lista">
-                                <h6><b>Etapa:</b></h6>
-                                <div>Prospecção<hr></div>
-                                <div>Prosposta enviada<hr></div>
-                                <div>Negociação<hr></div>
-                                <div>Prosposta aceita<hr></div>
-                                <div>Venda concluída<hr></div>
-                                <div>Perdido</div>
+                            <div class="dropdown-body"  id="drop_filtro_lista">
+                                <div class="dropdown-bico" id="bico-menu-2">
+                                </div>
+                                <div class="dropdown-conteudo" id="bico-content-2">
+                                    <h6><b>Etapa:</b></h6>
+                                    <div>Prospecção<hr></div>
+                                    <div>Prosposta enviada<hr></div>
+                                    <div>Negociação<hr></div>
+                                    <div>Prosposta aceita<hr></div>
+                                    <div>Venda concluída<hr></div>
+                                    <div>Perdido</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="msg_area_msgs" >
+                    <section class="classe-contatos" v-for="(rows, idn) in rows" :key="idn"> 
+                        <div class="contato-profile-list" @click="wapp_select_talk(rows.idn, rows.nome, rows.fone, rows.img)" :id="'contato-' + rows.idn">
+                            <div class="contato-profile-foto"><img :src="rows.img"></div>
+                            <div class="contato-profile-info">
+                                <div class="contato-profile-nome">{{ rows.nome }}</div>
+                                <div class="contato-profile-fone">{{ rows.fone }}</div>
+                                <div class="contato-profile-status">{{ rows.status }}</div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
 
@@ -281,10 +365,47 @@
 const YourCustomModule = require("../assets/js/header.js");
 alert(YourCustomModule.message);
 */
+import axios from "axios";
+var $user_idn=46;
 
 export default {
     name: 'Home',
+        data(){
+        return{
+            rows: []
+        }
+    },
+
     methods:{
+        SH_show_hide: function(dropname){
+            var x=document.getElementsByClassName("dropdown-body")
+            var i;
+            for (i=0; i< x.length; i++){
+                x[i].style.display='none';
+            }
+            setTimeout(() => {
+                var dropx=document.getElementById(dropname);
+                var ini_opacity="1";
+                var final_opacity="0";
+                var ini_display="flex";
+                var final_display="none";
+
+                if(dropx.style.opacity!='1') {
+                    ini_opacity="0";
+                    final_opacity="1";
+                    final_display="flex";
+                }
+                dropx.style.display=ini_display;
+                dropx.style.opacity=ini_opacity;
+                dropx.style.opacity=final_opacity;
+
+                setTimeout(() => {
+                    dropx.style.display=final_display;
+                }, 500);
+            }, 300);
+
+
+        },
         SH_lista_lojas_v: function(){
             var bico=document.getElementById('lista_lojas_bico_v')
             var lista=document.getElementById('lista_lojas_lista_v')
@@ -292,23 +413,25 @@ export default {
             var comboLike_grpSegmentos = document.getElementById("combo-like-grp-segmentos");
             var comboLike_grpFunil = document.getElementById("combo-like-grp-funil");
 
-            var showhide="block";
+            var showhide="flex";
             var height_bico="10px";
             var height_linha="";
-
-            lista.style.opacity="0";
-            if(lista.style.display=="block"){
+            var ini_opacity="0";
+            var final_opacity="1";
+            if(lista.style.display=="flex"){
+                ini_opacity="1";
+                final_opacity="0";
                 showhide="none";
                 height_bico="0";
                 height_linha="0";
             }
-
+            lista.style.opacity=ini_opacity;
             lista.style.opacity=.1;
             bico.style.display=showhide;
             lista.style.display=showhide;
             bico.style.height=height_bico;
             setTimeout(() => {
-                lista.style.opacity=1;
+                lista.style.opacity=final_opacity;
                 lista.style.height=height_linha;
                 comboLike_grpLojas.style.display=showhide;
                 comboLike_grpSegmentos.style.display=showhide;
@@ -440,17 +563,10 @@ export default {
             var comboLike_listaDir = document.getElementById("filtro_dir_lista");
             var btn_genericos = document.getElementById("botoes-genericos");
             var btn_genericos_v = document.getElementById("botoes-genericos-v");
-            var comboLike_grpLojas = document.getElementById("combo-like-grp-lojas");
-            var comboLike_grpSegmentos = document.getElementById("combo-like-grp-segmentos");
-            var comboLike_grpFunil = document.getElementById("combo-like-grp-funil");
-            var listaLojas_bico = document.getElementById("lista_lojas_bico");
-            var listaLojas_lista = document.getElementById("lista_lojas_lista");
-            var segmento_bico = document.getElementById("segmentos_bico");
-            var segmento_lista = document.getElementById("segmentos_lista");
-            var funil_bico = document.getElementById("funil_bico");
-            var funil_lista = document.getElementById("funil_lista");
+            var drop_funil = document.getElementById("drop_funil");
+
             var listaLojas_bico_v = document.getElementById("lista_lojas_bico_v");
-            var listaLojas_lista_v = document.getElementById("lista_lojas_lista_v");
+            //var listaLojas_lista_v = document.getElementById("lista_lojas_lista_v");
 
             if(show==1){
                 btn_genericos.style.minWidth="0";
@@ -459,26 +575,10 @@ export default {
                 comboLike_bicoDir.style.left="calc(100vw - 430px)";
                 comboLike_listaDir.style.left="calc(100vw - 650px)";
                 btn_genericos_v.style.display="flex";
+                btn_genericos.style.display="none";
 
                 listaLojas_bico_v.style.display="none";
-                listaLojas_lista_v.style.display="none";
-
-                comboLike_grpLojas.style.display="none";
-                comboLike_grpSegmentos.style.display="none";
-                comboLike_grpFunil.style.display="none";
-
-                comboLike_grpLojas.style.position="absolute";
-                comboLike_grpSegmentos.style.position="absolute";
-                comboLike_grpFunil.style.position="absolute";
-
-                listaLojas_bico.style.top="150px";
-                listaLojas_lista.style.top="159px";
-
-                segmento_bico.style.top="190px";
-                segmento_lista.style.top="199px";
-
-                funil_bico.style.top="230px";
-                funil_lista.style.top="239px";
+                drop_funil.style.left="50px";
 
 
             }else{
@@ -487,23 +587,9 @@ export default {
                 comboLike_bicoDir.style.left="calc(100vw - 70px)";
                 comboLike_listaDir.style.left="calc(100vw - 290px)";
                 btn_genericos.style.minWidth="250px";
+                btn_genericos.style.display="flex";
                 btn_genericos_v.style.display="none";
-
-                comboLike_grpLojas.style.display="block";
-                comboLike_grpSegmentos.style.display="block";
-                comboLike_grpFunil.style.display="block";
-                comboLike_grpLojas.style.position="inherit";
-                comboLike_grpSegmentos.style.position="inherit";
-                comboLike_grpFunil.style.position="inherit";
-
-                listaLojas_bico.style.top="100px";
-                listaLojas_lista.style.top="109px";
-
-                segmento_bico.style.top="100px";
-                segmento_lista.style.top="109px";
-
-                funil_bico.style.top="100px";
-                funil_lista.style.top="109px";
+                drop_funil.style.left="";
 
 
 
@@ -548,6 +634,86 @@ export default {
             }, 300);
 
         },
+        wapp_load_user:function(){
+
+            const dataForm = new FormData();
+            dataForm.append('idn', $user_idn);
+            dataForm.append('lookup', 'marcio');
+            
+            var body = {
+                idn: $user_idn,
+                lookup: 'Flintstone@gmail.com'
+            }
+            axios({
+                method: 'post',
+                url: 'http://uwork247.com:6001/wapp/usuarios?idn='+$user_idn,
+                data: body,
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            /*
+            axios.post('http://192.168.0.11:6001/wapp/usuarios', dataForm)
+            */
+            .then(function(response) {
+                if(response.data.rows.length){
+                    var i=response.data.rows.length;
+                    var f;
+                    for(f=0;f<i;f++){
+                        document.getElementById('user-profile-img').src=response.data.rows[f].img;
+                    }
+                }
+
+            })
+            .catch(function (error) {
+                alert('erro 1: '+error);
+                console.log(error);
+            });
+        },
+        wapp_load_contatos:function(ativo){
+
+            var body = {
+                idn: $user_idn,
+                lookup: 'Flintstone@gmail.com'
+            }
+            axios({
+                method: 'post',
+                url: 'http://uwork247.com:6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
+                data: body,
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then((response) => {
+               this.rows = response.data.rows;
+                setTimeout(() => {
+                    this.wapp_select_talk(response.data.rows[0].idn, response.data.rows[0].nome, response.data.rows[0].fone, response.data.rows[0].img);
+                }, 100);
+                
+
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+        },
+        wapp_muda_aba:function(isso){
+            
+            var x=document.getElementsByClassName('esys-aba');
+            
+            var i;
+            for(i=0;i<x.length;i++){
+                x[i].className="esys-aba";
+            }
+            x[isso].classList.add("active");
+        },
+        wapp_select_talk:function(idn, nome, fone, img){
+            var contatox=document.getElementsByClassName("contato-profile-list");
+            var i;
+            for(i=0;i<contatox.length;i++){
+                contatox[i].classList.remove("active");
+            }
+            document.getElementById("current-contato-img").src=img;
+            document.getElementById("current-contato-nome").innerText=nome;
+            document.getElementById("current-contato-fone").innerText=fone;
+            document.getElementById("contato-"+idn).classList.add("active");
+//            alert(document.getElementById("contato-"+idn).innerText)
+        },
         closeMenu: function(){
             this.menuActive = false;
         }
@@ -562,18 +728,20 @@ export default {
         }
         el[1].classList.add("active");
         document.getElementById('btn-show-hide-main-menu').click();
-
-        
+        this.wapp_load_contatos('ativo');
 
     },
     created() {
+        this.wapp_load_user();
         
     }
 
 }
+
+
+
 </script>
 
 <style scoped>
-
 
 </style>

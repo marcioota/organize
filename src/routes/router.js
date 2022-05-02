@@ -7,6 +7,9 @@ import Chat from '@/pages/Chat';
 import Painel from '@/pages/Painel';
 import Mkt from '@/pages/Mkt';
 import crm from '@/pages/Crm';
+import test from '@/pages/Test';
+import app from '@/pages/app';
+import contato from '@/pages/Contato';
 
 const routes = [{
     path:'/',
@@ -23,6 +26,19 @@ const routes = [{
 {
     path:'/crm',
     component: crm
+},
+{
+    path:'/test',
+    component: test
+}
+,
+{
+    path:'/app',
+    component: app
+},
+{
+    path:'/contato',
+    component: contato
 }
 
 

@@ -2,16 +2,13 @@
     <main>
         <section class="container">
             <h1>Contato</h1>
-            <section class="contacts" v-for="(contato, index) in contacts" :key="index"> 
+            <section class="contacts" v-for="(contato, idn) in contatos" :key="idn"> 
                 <div class="contato-title">{{ contato.title }}</div>
+                <div class="contato-title">{{ contato.label }}</div>
+                <div class="contato-title">{{ contato.link }}</div>
                 <a :href="contato.link"  target="_blank">{{ contato.label }}</a>
 
             </section>
-                <div class="row">
-                    <div class="col-md-4">col1</div>
-                    <div class="col-md-4">col2</div>
-                    <div class="col-md-4">col3</div>
-                </div>            
         </section>
     </main>
 </template>
@@ -20,24 +17,17 @@
 import api from '@/services/api.js';
 
 export default {
-    name: 'Contato',
+    name: 'Contraaaaato',
     data(){
         return{
-            contacts: []
+            contatos: []
         }
     },
     mounted(){
         api.get('/contacts.json').then(
             response => {
-                this.contacts = response.data;
+                this.contatos = response.data;
         });
-        var el=document.getElementsByClassName("mini-menu-item-cell")
-        var i=0;
-        for(i=0;i<el.length;i++){
-            el[i].classList.remove("active");
-        }
-        el[3].classList.add("active");    
-        document.getElementById('btn-show-hide-main-menu').click();
         }
 }
 </script>

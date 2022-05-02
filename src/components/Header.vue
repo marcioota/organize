@@ -49,7 +49,7 @@
                 </div>
                 <div id="user-profile">
                     <i class="bi bi-chevron-down"></i>
-                    <img src="../assets/imgs/users/114.jpg" class="user-profile-img" >
+                    <img src="../assets/imgs/users/114.jpg" class="user-profile-img" id="user-profile-img" >
                 </div>
             </div>
         </nav>
