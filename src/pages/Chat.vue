@@ -658,7 +658,7 @@ export default {
             }
             axios({
                 method: 'post',
-                url: 'http://191.252.59.158:6001/wapp/usuarios?idn='+$user_idn,
+                url: 'https://uwork247.com/organize/?metodo=wapp/usuarios&idn='+$user_idn,
                 data: body,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
@@ -688,7 +688,7 @@ export default {
             }
             axios({
                 method: 'post',
-                url: 'http://191.252.59.158:6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
+                url: 'http://uwork247.com/organize/?metodo=wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
                 data: body,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
