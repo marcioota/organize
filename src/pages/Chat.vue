@@ -646,7 +646,7 @@ export default {
             }
             axios({
                 method: 'post',
-                url: 'http://uwork247.com:6001/wapp/usuarios?idn='+$user_idn,
+                url: 'http://191.252.59.158:6001/wapp/usuarios?idn='+$user_idn,
                 data: body,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
@@ -676,7 +676,7 @@ export default {
             }
             axios({
                 method: 'post',
-                url: 'http://uwork247.com:6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
+                url: 'http://191.252.59.158:6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
                 data: body,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
@@ -719,7 +719,7 @@ export default {
         }
         
     },
-     mounted() {
+    async mounted() {
         this.dataSrc = "../assets/js/header.js";
         var el=document.getElementsByClassName("mini-menu-item-cell")
         var i=0;
@@ -731,7 +731,7 @@ export default {
         this.wapp_load_contatos('ativo');
 
     },
-    created() {
+    async created() {
         this.wapp_load_user();
         
     }
