@@ -370,6 +370,18 @@ var $user_idn=46;
 
 export default {
     name: 'Home',
+    metaInfo: {
+    title: 'Chat',
+    titleTemplate: '%s | Organnize - CRM',
+    htmlAttrs: {
+      lang: 'pt-BR'
+    },
+    meta: [
+      { charset: 'utf-8' },
+      { httpEquiv: 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]
+  },
         data(){
         return{
             rows: []
