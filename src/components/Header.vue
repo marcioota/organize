@@ -66,11 +66,6 @@ export default {
             menuActive: false
         }
     },
-    metaInfo: {
-      script: [
-        { src: '../assets/js/header.js', async: false, defer: false }
-      ],
-    },
     methods:{
         openMenu: function(){
             this.menuActive =  true;

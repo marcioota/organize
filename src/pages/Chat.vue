@@ -1,45 +1,68 @@
 <template>
-    <main>
-
+    <main >
         <!-- CHAT AREA -->
-            <div id="chat-area">
+            <div id="chat-area" @click="close_all_dropdowns">
                 <div id="chat-area-msgs">
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-                        <li>msngsagens</li>
-
-                </div>        
+                    {{ $data_atendimento ="" }}
+                    <section id="chat-area-msgs-section" class="classe-mensagens" v-for="(rows, idn) in lista_chats" :key="idn"> 
+                        <template v-if="$data_atendimento != rows.datax">
+                            <div class="hidden"> {{ $data_atendimento=rows.datax }}
+                                {{ $show_data=$data_atendimento }}
+                            </div>
+                            <hr>
+                            <h1 v-if="rows.ddiff==0" ><span> <i>Hoje</i> </span></h1>
+                            <h1 v-else-if="rows.ddiff==1" ><span> <i>Ontem </i></span></h1>
+                            <h1 v-else> <span> <i> {{ $data_atendimento }} </i></span></h1>
+                        </template>
+                        <div class="mensagem-list">
+                            <div v-if="rows.in_out=='saida'" class="mensagem-text-saida">
+                                <div class="msg-baloon">
+                                    <div class="msg-baloon-detalhe">
+                                        <span v-html="rows.midias"></span>
+                                        <span v-html="rows.texto_msg2"></span>
+                                    </div>
+                                    <div class="mensagem-entrega">
+                                        <div class="mensagem-hora">{{ rows.datahora }}</div>
+                                        <div class="mensagem-icon">
+                                            <i v-if="rows.status_msg=='read'" class="bi bi-check2-all font-blue"></i>
+                                            <i v-else-if="rows.status_msg=='delivered'" class="bi bi-check2-all"></i>
+                                            <i v-else-if="rows.status_msg=='sent'" class="bi check2"></i>
+                                            <i v-else class="bi bi-check2"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-else class="mensagem-text-entrada">
+                                <div class="msg-baloon">
+                                    <div class="msg-baloon-detalhe">
+                                        <span v-html="rows.midias"></span>
+                                        <span v-html="rows.texto_msg2"></span>
+                                    </div>
+                                    <div class="mensagem-entrega">
+                                        <div class="mensagem-hora">{{ rows.datahora }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <DropZone ref="thisDropZone"></DropZone>
+                <ChatEmoticons></ChatEmoticons>
+                <MenuMidias ref="thisMenuMidias"></MenuMidias>
+                
+                
+                </div>
                 <div id="chat-area-msgs-send">
-                    <a href="#4" id=""><i class="bi bi-emoji-smile"></i></a>
-                    <a href="#4" id=""><img src="../assets/imgs/iconefoguete.png" class="icone-foguete"></a>
-                    <a href="#4" id=""><i class="bi bi-paperclip"></i></a>
+                    <a href="#4" id="msg_ico_emoticon" @click="wapp_show_hide_emoticon()"><i class="bi bi-emoji-smile"></i></a>
+                    <a href="#4" id="msg_ico_foguete"><img src="../assets/imgs/iconefoguete.png" class="icone-foguete"></a>
+                    <a href="#4" id="msg_ico_dropzone" @click="memu_midia_show_hide()"><i class="bi bi-paperclip"></i></a>
                     
-                    <textarea name="" id="" cols="30" class="form-control" rows="2"></textarea>
+                    <textarea name="" id="msg_to_send" cols="30" class="form-control" rows="2" v-on:keyup.enter="wapp_send_msg"></textarea>
+                    <a href="#4" id="msg_ico_send" @click="wapp_send_msg()"><img src="../assets/imgs/envio.png"></a>
                     <a href="#4" id=""><i class="bi bi-mic-fill"></i></a>
                 </div>
             </div>
 
-        <div id="menu-chat">
+        <div id="menu-chat" >
             <div id="menu-chat-1-1">
                 <a class="esys-aba active" @click="wapp_load_contatos('ativo');wapp_muda_aba(0)">
                     Caixa de Entrda
@@ -51,17 +74,46 @@
                 </a>
             </div>
             <div class="main-chat-header">
-                <div id="menu-chat-1-2">
-                    <div id="client-profile">
-                        <img src="../assets/imgs/users/116.jpg" class="client-profile-img" id="current-contato-img" >
-                        <div>
-                            <b id="current-contato-nome">Ana Margarida</b>
-                            <p id="current-contato-fone">+55 11 99999-9999</p> 
+                <div id="client-block">
+                    <div id="menu-chat-1-2">
+                        <div id="client-profile" @click="POP_usuario_perfil">
+                            <img src="../assets/imgs/users/116.jpg" class="client-profile-img" id="current-contato-img" >
+                            <div>
+                                <b id="current-contato-nome">Ana Margarida</b>
+                                <p id="current-contato-fone">+55 11 99999-9999</p> 
+                                <input type="hidden" name="" id="host">
+                                <input type="hidden" name="" id="cliente_idn">
+                                <input type="hidden" name="" id="user_idn">
+                                <input type="hidden" name="" id="user_fone">
+                                <input type="hidden" name="" id="user_nome">
+                                <input type="hidden" name="" id="contato_idn">
+                                <input type="hidden" name="" id="contato_fone">
+                                <input type="hidden" name="" id="contato_nome">
+                                <input type="hidden" name="" id="contato_canal">
+                                <input type="hidden" name="" id="contato_funil">
+                                <input type="hidden" name="" id="contato_segmentacoes">
+
+                            </div>
                         </div>
+
                     </div>
 
-                </div>
 
+<!-- DROPDOWN HORIZONTAL LOJAS, SEGMENTACAO E FUNIL -->
+                <div id="botoes-genericos">
+
+            
+<!-- 3 DROPDOWN FUNIL -->
+                    <DropDownFunis></DropDownFunis>
+
+<!-- 3 DROPDOWN SEGMENTACAO  -->
+                    <DropDownSegmentacoes></DropDownSegmentacoes>
+
+<!-- 3 DROPDOWN LOJAS-->
+                    <DropDownCanais></DropDownCanais>
+                    
+            </div>
+        </div>
 
 <!-- DROPDOWN VERTICAL LOJAS, SEGMENTACAO E FUNIL TELA MINIMA -->
                 <div id="botoes-genericos-v" >
@@ -76,143 +128,15 @@
                       <div class="combo-like-lista-v" id="lista_lojas_lista_v">
 
 <!-- DROPDOWN VERTICAL LOJAS-->
-                        <div class="dropdown-like-grp" @click="SH_show_hide('drop_funil_v')" >
-                            <div class="drop-btn creme" >
-                                <label>Prospecção</label>
-                                <i class="bi bi-chevron-down"></i>
-                            </div>
-                            <div class="dropdown-body" id="drop_funil_v">
-                                <div class="dropdown-bico" id="bico-menu-1">
-                                </div>
-                                <div class="dropdown-conteudo" id="bico-content-1">
-                                    <div>Prospecção</div><hr>
-                                    <div>Prosposta enviada</div><hr>
-                                    <div>Negociação</div><hr>
-                                    <div>Prosposta aceita</div><hr>
-                                    <div>Venda concluída</div><hr>
-                                    <div>Perdido</div>
-                                </div>
-                            </div>
-                        </div>
-
+                    <DropDownFunisMini></DropDownFunisMini>
 
 <!-- DROPDOWN VERTICAL SEGMENTACAO  -->
-                    <div class="dropdown-like-grp">
-                        <div class="drop-btn roxo-claro"  @click="SH_show_hide('drop_segmentacao_v')" >
-                            <label>Segmentações</label>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <div class="dropdown-body" id="drop_segmentacao_v">
-                            <div class="dropdown-bico" id="bico-menu-1">
-                             </div>
-                             <div class="dropdown-conteudo" id="bico-content-1">
-                            <p class="search-box-mini">
-                                <i class="bi bi-search"></i>
-                                <input type="text" class="" placeholder="Pesquisar grupo">
-                            </p>
-                            <p><input type="checkbox" name="" id=""> Interessando em Batmóvel</p>
-                            <p><input type="checkbox" name="" id=""> Interessando em Netflix</p>
-                            <p><input type="checkbox" name="" id=""> Querendo Havaianas</p>
-                            <p><input type="checkbox" name="" id=""> Buscando Passagens</p>
-                            </div>
-                                
-                        </div>
-                    </div>
-
+                    <DropDownSegmentacoesMini></DropDownSegmentacoesMini>
 <!-- DROPDOWN VERTICAL LOJAS-->
-                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_lojas_v')" >
-                        <div class="drop-btn verde-claro" >
-                            <label>Loja A</label>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <div class="dropdown-body" id="drop_lojas_v">
-                            <div class="dropdown-bico" id="bico-menu-1">
-                             </div>
-                             <div class="dropdown-conteudo" id="bico-content-1">
-                                <div>Loja B</div>
-                                <div>Loja C</div>
-                                <div>Loja D</div>
-                                <div>Loja E</div>
-                            </div>
-                                
-                        </div>
+                    <DropDownCanaisMini></DropDownCanaisMini>
                     </div>
-
-                      </div>
 
                 </div>
-
-
-<!-- DROPDOWN HORIZONTAL LOJAS, SEGMENTACAO E FUNIL -->
-                <div id="botoes-genericos">
-
-
-<!-- 3 DROPDOWN FUNIL -->
-                    
-                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_funil')" >
-                        <div class="drop-btn creme" >
-                            <label>Prospecção</label>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <div class="dropdown-body" id="drop_funil">
-                            <div class="dropdown-bico" id="bico-menu-1">
-                             </div>
-                             <div class="dropdown-conteudo" id="bico-content-1">
-                                <div>Prospecção</div><hr>
-                                <div>Prosposta enviada</div><hr>
-                                <div>Negociação</div><hr>
-                                <div>Prosposta aceita</div><hr>
-                                <div>Venda concluída</div><hr>
-                                <div>Perdido</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-<!-- 3 DROPDOWN SEGMENTACAO  -->
-                    <div class="dropdown-like-grp">
-                        <div class="drop-btn roxo-claro"  @click="SH_show_hide('drop_segmentacao')" >
-                            <label>Segmentações</label>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <div class="dropdown-body" id="drop_segmentacao">
-                            <div class="dropdown-bico" id="bico-menu-1">
-                             </div>
-                             <div class="dropdown-conteudo" id="bico-content-1">
-                            <p class="search-box-mini">
-                                <i class="bi bi-search"></i>
-                                <input type="text" class="" placeholder="Pesquisar grupo">
-                            </p>
-                            <p><input type="checkbox" name="" id=""> Interessando em Batmóvel</p>
-                            <p><input type="checkbox" name="" id=""> Interessando em Netflix</p>
-                            <p><input type="checkbox" name="" id=""> Querendo Havaianas</p>
-                            <p><input type="checkbox" name="" id=""> Buscando Passagens</p>
-                            </div>
-                                
-                        </div>
-                    </div>
-
-
-<!-- 3 DROPDOWN LOJAS-->
-                    <div class="dropdown-like-grp" @click="SH_show_hide('drop_lojas')" >
-                        <div class="drop-btn verde-claro" >
-                            <label>Loja A</label>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <div class="dropdown-body" id="drop_lojas">
-                            <div class="dropdown-bico" id="bico-menu-1">
-                             </div>
-                             <div class="dropdown-conteudo" id="bico-content-1">
-                                <div>Loja B</div>
-                                <div>Loja C</div>
-                                <div>Loja D</div>
-                                <div>Loja E</div>
-                            </div>
-                                
-                        </div>
-                    </div>
-
-                    
-            </div>
 
 
 
@@ -233,7 +157,8 @@
     <!--BOTAO SEARCH -->  
                     <div class="search-box" id="search-lado-direito">
                         <i class="bi bi-search" @click="hideSearchLadoDireito"></i>
-                        <input type="text" class="form-control" placeholder="Digite o que deseja">
+                        <input type="text" class="form-control" placeholder="Digite o que deseja" id="lookfor_msg" @keyup="wapp_load_msgs()">
+                        <p class='clear-this' @click="clear_text('lookfor_msg')">X</p>
                     </div>
                     <a href="#1" class="btn-small" id="btn-show-seach-lado-direito" @click="showSearchLadoDireito"><i class="bi bi-search"></i></a>
     <!--BOTAO TELEFONE  -->  
@@ -250,7 +175,7 @@
                             <b class="badge">Protocolo 123189898</b>
                             <div><i class="bi bi-clock"></i> Histórico<hr></div>
                             <div @click="POP_transferencia"><i class="bi bi-arrow-left-right"></i>Transferência<hr></div>
-                            <div @click="POP_usuario"><i class="bi bi-person-lines-fill"></i>Editar Usuário<hr></div>
+                            <div @click="POP_usuario_dados"><i class="bi bi-person-lines-fill"></i>Editar Usuário<hr></div>
                             <div><i class="bi bi-images"></i>Editar Papel de Parede<hr></div>
                         </div>
                     </div>
@@ -261,7 +186,7 @@
 
 
 <!--COLUNA CONTATOS DO CHAT -->
-            <div id="msg-area">
+            <div id="msg-area" >
                 <div id="msg-area-header">
                     <div id="msg-area-opcoes">
                         <div class="msg-area-opcoes-item active" >
@@ -293,53 +218,49 @@
                     <div class="combo-like-grp opcoes-grp-chat">
                         <div class="search-box ">
                             <i class="bi bi-search"></i>
-                            <input type="text" class="form-control" placeholder="Procura conversa">
+                            <input type="text" class="form-control" placeholder="Procura conversa" id="lookfor_contatos" @keyup="wapp_load_contatos_lookup()">
+                            <p class='clear-this' @click="clear_text('lookfor_contatos')">X</p>
                         </div>
 
                         <a href="#1" class="btn-small" id=""><img src="../assets/imgs/add-contato.png"></a>
-                                    
-                        <div class="dropdown-like-grp" @click="SH_show_hide('drop_filtro_lista')" >
-                            <a href="#1" class="btn-small" id="filtro-chats"><img src="../assets/imgs/segmentacao.png"></a>
-                            <div class="dropdown-body"  id="drop_filtro_lista">
-                                <div class="dropdown-bico" id="bico-menu-2">
-                                </div>
-                                <div class="dropdown-conteudo" id="bico-content-2">
-                                    <h6><b>Etapa:</b></h6>
-                                    <div>Prospecção<hr></div>
-                                    <div>Prosposta enviada<hr></div>
-                                    <div>Negociação<hr></div>
-                                    <div>Prosposta aceita<hr></div>
-                                    <div>Venda concluída<hr></div>
-                                    <div>Perdido</div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        <DropDownFiltroFunil></DropDownFiltroFunil>
                     </div>
                 </div>
                 <div id="msg_area_msgs" >
-                    <section class="classe-contatos" v-for="(rows, idn) in rows" :key="idn"> 
-                        <div class="contato-profile-list" @click="wapp_select_talk(rows.idn, rows.nome, rows.fone, rows.img)" :id="'contato-' + rows.idn">
-                            <div class="contato-profile-foto"><img :src="rows.img"></div>
+                    <section class="classe-contatos" v-for="(rows, idn) in contatos_lista" :key="idn"> 
+                        <div class="contato-profile-list" @click="wapp_select_talk(rows.idn, rows.nome, rows.fone, rows.img, rows.apikeyfortest, rows.canal_whats, rows.funil, rows.segmentacoes)" :id="'contato-' + rows.idn">
+                            <div class="contato-profile-foto"><img :src="rows.img">
+                                    <div v-if="rows.origem=='whatsapp'" class="origem-whatsapp" ></div>
+                                    <div v-else-if="rows.origem=='instagram'" class="origem-instagram" ></div>
+                                    <div v-else-if="rows.origem=='facebook'" class="origem-facebook" ></div>
+                                    <div v-else class="origem-whatsapp" ></div>
+                            
+                            </div>
                             <div class="contato-profile-info">
-                                <div class="contato-profile-nome">{{ rows.nome }}</div>
-                                <div class="contato-profile-fone">{{ rows.fone }}</div>
+                                <div class="contato-profile-nome"><span v-html="rows.nome"></span></div>
+                                <div class="contato-profile-fone"><span v-html="rows.fone"></span></div>
+                                <div class="contato-profile-text"><span v-html="rows.texto_msg2"></span></div>
                                 <div class="contato-profile-status">{{ rows.status }}</div>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
-
+            
             <div class="popover-area" id="pop-over-transfer">
                 <div  class="popover-header">
                     <h5 class="popover-title">Transferência</h5>
                     <a href="#4" id="" @click="POP_change_places_showHide_popover(0)"><i class="bi bi-x-circle"></i></a>
                 </div>
             </div>
+            <UsuarioPerfil ref="thisUsuarioPerfil"></UsuarioPerfil>
+            <UsuarioPerfilMidias ref="thisUsuarioPerfilMidias"></UsuarioPerfilMidias>
+            <UsuarioDados ref="thisUsuarioDados"></UsuarioDados>
 
             <div class="popover-area" id="pop-over-dados-usuario">
                 <div  class="popover-header">
-                    <h5 class="popover-title">Dados do Usuário</h5>
+                    <h5 class="popover-title">Dados do Usuário 3434</h5>
                     <a href="#4" id=""  @click="POP_change_places_showHide_popover(0)"><i class="bi bi-x-circle"></i></a>
                 </div>
             </div>
@@ -353,8 +274,7 @@
 
 
         </div>
-
-
+        
     </main>
     
 </template>
@@ -366,10 +286,51 @@ const YourCustomModule = require("../assets/js/header.js");
 alert(YourCustomModule.message);
 */
 import axios from "axios";
-var $user_idn=46;
+
+var $cliente_idn=152;
+var $user_idn=48;
+var $user_fone="4930609859535";
+var $user_nome="360";
+/// server-to-local
+var $organize_arquivos="http://localhost/organize_arquivos/mensagens/"
+if(window.location.href.toString().indexOf('localhost')==-1)
+    $organize_arquivos="http://esystem.com.br/organize_arquivos/mensagens/"
+var $current_contato_idn;
+var $last_scroll_top=0;
+
+var $contato_idn;
+var $contato_nome;
+var $contato_fone;
+var $contato_img;
+var $contato_apikey;
+
+
+/// server-to-local
+
+var $host="http://localhost"; ///<< config p desktop
+if(window.location.href.toString().indexOf('localhost')==-1)
+    $host="http://191.252.64.112"; ///<< config p NOVO SERVER
+
+///var $host='https://uwork247.com'; <= não use por enquanto
+///var $host='http://uwork247.com'; ///<< config p servidor
+///var $host="http://191.252.64.112"; ///<< config p NOVO SERVER
+
+import ChatEmoticons from '../components/ChatEmoticons';
+import DropZone from '../components/dropzone';
+import MenuMidias from '../components/menuMidias';
+import DropDownCanais from '../components/dropdownCanais';
+import DropDownCanaisMini from '../components/dropdownCanaisMini';
+import DropDownFunis from '../components/dropdownFunis';
+import DropDownFunisMini from '../components/dropdownFunisMini';
+import DropDownSegmentacoes from '../components/dropdownSegmentacoes';
+import DropDownSegmentacoesMini from '../components/dropdownSegmentacoesMini';
+import DropDownFiltroFunil from '../components/dropdownFiltroFunil';
+import UsuarioPerfil from '../components/usuarioPerfil';
+import UsuarioPerfilMidias from '../components/usuarioPerfilMidias';
+import UsuarioDados from '../components/usuarioDados';
 
 export default {
-    name: 'Home',
+    name: 'Chat-001',
     metaInfo: {
     title: 'Chat',
     titleTemplate: '%s | Organnize - CRM',
@@ -381,14 +342,48 @@ export default {
       { httpEquiv: 'Content-Security-Policy', content: 'upgrade-insecure-requests' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ]
+
   },
-        data(){
-        return{
-            rows: []
-        }
+  events:{
+      updateContato: function(){
+          alert(' não funciona');
+      }
+  },
+    components: { 
+        ChatEmoticons ,
+        DropZone,
+        MenuMidias,
+        DropDownCanais,
+        DropDownCanaisMini,
+        DropDownFunis,
+        DropDownFunisMini,
+        DropDownSegmentacoes,
+        DropDownSegmentacoesMini,
+        DropDownFiltroFunil,
+        UsuarioPerfil,
+        UsuarioPerfilMidias,
+        UsuarioDados
     },
 
+    data: () => ({
+            contatos_lista: [],
+            lista_chats:[],
+            organize_arquivos: $organize_arquivos,
+            host: $host,
+            cliente_idn: $cliente_idn,
+            contato_idn: $contato_idn,
+            user_idn: $user_idn,
+            teste: "marcio",
+            tasks: []
+
+    }),
     methods:{
+        wapp_current_user_dir:function(idn_atendente, idn_contato, nome_midia){
+            var dir= $organize_arquivos +'/'+idn_atendente+'-'+idn_contato+'='+nome_midia;
+            dir= $organize_arquivos +'/'+idn_atendente+'-'+idn_contato;
+            return dir;
+            ///+ rows.idn_atendente + rows.idn_contato +'/' + rows.texto_msg"></span>
+        },
         SH_show_hide: function(dropname){
             var x=document.getElementsByClassName("dropdown-body")
             var i;
@@ -576,6 +571,7 @@ export default {
             var btn_genericos = document.getElementById("botoes-genericos");
             var btn_genericos_v = document.getElementById("botoes-genericos-v");
             var drop_funil = document.getElementById("drop_funil");
+            var emoticons_area= document.getElementById('chat-area-emoticons');
 
             var listaLojas_bico_v = document.getElementById("lista_lojas_bico_v");
             //var listaLojas_lista_v = document.getElementById("lista_lojas_lista_v");
@@ -584,6 +580,7 @@ export default {
                 btn_genericos.style.minWidth="0";
                 menu_chat.style.width="calc(100% - 360px)";
                 chat_area.style.width="calc(100vw - 700px)";
+                emoticons_area.style.width="calc(100vw - 700px)";
                 comboLike_bicoDir.style.left="calc(100vw - 430px)";
                 comboLike_listaDir.style.left="calc(100vw - 650px)";
                 btn_genericos_v.style.display="flex";
@@ -596,6 +593,7 @@ export default {
             }else{
                 menu_chat.style.width="100%";
                 chat_area.style.width="calc(100vw - 350px)";
+                emoticons_area.style.width="calc(100vw - 350px)";
                 comboLike_bicoDir.style.left="calc(100vw - 70px)";
                 comboLike_listaDir.style.left="calc(100vw - 290px)";
                 btn_genericos.style.minWidth="250px";
@@ -610,12 +608,26 @@ export default {
         POP_transferencia: function(){
             this.POP_change_places_showHide_popover(1);
             document.getElementById("pop-over-transfer").style.display="block";
-            
         },
         POP_usuario: function(){
             this.POP_change_places_showHide_popover(1);
             document.getElementById("pop-over-dados-usuario").style.display="block";
-            
+        },
+        POP_usuario_perfil: function(){
+            this.POP_change_places_showHide_popover(1);
+            document.getElementById("pop-over-perfil-usuario").style.display="block";
+            this.$refs.thisUsuarioPerfil.load_contato_perfil();
+        },
+        POP_usuario_dados: function(){
+            this.POP_change_places_showHide_popover(1);
+            document.getElementById("pop-over-dados-usuario").style.display="block";
+            this.$refs.thisUsuarioDados.load_contato_dados();
+        },
+        POP_usuario_perfil_midias: function(){
+            this.POP_change_places_showHide_popover(1);
+            document.getElementById("pop-over-perfil-usuario-midias").style.display="block";
+            this.$refs.thisUsuarioPerfilMidias.load_contato_perfil_midias();
+
         },
         POP_financeiro: function(){
             this.POP_change_places_showHide_popover(1);
@@ -647,18 +659,16 @@ export default {
 
         },
         wapp_load_user:function(){
-
             const dataForm = new FormData();
             dataForm.append('idn', $user_idn);
             dataForm.append('lookup', 'marcio');
-            
             var body = {
                 idn: $user_idn,
                 lookup: 'Flintstone@gmail.com'
             }
             axios({
                 method: 'post',
-                url: 'https://uwork247.com/organize/?metodo=wapp/usuarios&idn='+$user_idn,
+                url: $host+':6001/wapp/usuarios?idn='+$user_idn,
                 data: body,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
@@ -666,12 +676,19 @@ export default {
             axios.post('http://192.168.0.11:6001/wapp/usuarios', dataForm)
             */
             .then(function(response) {
-                if(response.data.rows.length){
-                    var i=response.data.rows.length;
-                    var f;
-                    for(f=0;f<i;f++){
-                        document.getElementById('user-profile-img').src=response.data.rows[f].img;
+
+                if(response.data.rows==undefined){
+                    alert('Usuário não existe!\n#' +$user_idn )
+                }else{
+                    if(response.data.rows.length){
+                        var i=response.data.rows.length;
+                        var f;
+                        for(f=0;f<i;f++){
+                            document.getElementById('user-profile-img').src=response.data.rows[f].img;
+                            $user_fone=response.data.rows[f].fone;
+                            $user_nome=response.data.rows[f].nome;
                     }
+                }
                 }
 
             })
@@ -680,22 +697,25 @@ export default {
                 console.log(error);
             });
         },
-        wapp_load_contatos:function(ativo){
+        wapp_load_contatos_lookup:function(){
+            var lookup=document.getElementById('lookfor_contatos').value;
+            var esys_aba=document.getElementsByClassName('esys-aba');
+            var funil = document.getElementById('filtro_funil').value;
+            var ativo="";
+            if(esys_aba[0].classList.toString().indexOf('active')>-1) ativo='ativo'
+            if(esys_aba[1].classList.toString().indexOf('active')>-1) ativo=''
 
-            var body = {
-                idn: $user_idn,
-                lookup: 'Flintstone@gmail.com'
-            }
             axios({
                 method: 'post',
-                url: 'http://uwork247.com/organize/?metodo=wapp/contatos?idn='+$user_idn+'&fiativo='+ativo,
-                data: body,
+                url: $host+':6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo+'&lookup='+lookup+'&funil='+funil,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
             .then((response) => {
-               this.rows = response.data.rows;
+               this.contatos_lista = response.data.rows;
+
                 setTimeout(() => {
-                    this.wapp_select_talk(response.data.rows[0].idn, response.data.rows[0].nome, response.data.rows[0].fone, response.data.rows[0].img);
+                    var res=response.data.rows[0];
+                    this.wapp_select_talk(res.idn, res.nome, res.fone, res.img, res.apikeyfortest, res.canal_whats, res.funil, res.segmentacoes);
                 }, 100);
                 
 
@@ -703,6 +723,59 @@ export default {
             .catch(function (error) {
                 alert(error);
             });
+        },
+        wapp_load_contatos:function(ativo){
+            var lookup=document.getElementById('lookfor_contatos').value;
+            var funil = document.getElementById('filtro_funil').value;
+            axios({
+                method: 'post',
+                url: $host+':6001/wapp/contatos?idn='+$user_idn+'&fiativo='+ativo+'&lookup='+lookup+'&funil='+funil,
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then((response) => {
+               this.contatos_lista = response.data.rows;
+                setTimeout(() => {
+                    var res=response.data.rows[0];
+                    this.wapp_select_talk(res.idn, res.nome, res.fone, res.img, res.apikeyfortest, res.canal_whats, res.funil, res.segmentacoes);
+                }, 500);
+                
+
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+        },
+        wapp_load_msgs: function(){
+            var elem = document.getElementById('chat-area-msgs');
+            var lookup=document.getElementById('lookfor_msg').value;
+
+            var new_top=elem.scrollTop;
+            if(new_top<0) new_top=0;
+            //alert(new_top)
+            $last_scroll_top=new_top;
+///                alert($contato_idn + " => "+ lookup);
+            axios({
+                method: 'post',
+                url: $host+':6001/wapp/msgs?sender='+$user_idn+"&idn_contato="+$contato_idn+"&lookup="+lookup,
+                headers: {'Content-Type': 'multipart/form-data' }
+            })
+            .then((response) => {
+                   this.lista_chats = response.data.rows;
+                   if($current_contato_idn!=$contato_idn){
+                        $current_contato_idn=$contato_idn;
+                        setTimeout(() => {
+                            elem.scrollTop = elem.clientHeight+10000;
+                        }, 100);
+                   }else{
+                       elem.scrollTop = $last_scroll_top;
+                   }
+            })
+            .catch(function (error) {
+                alert('erro com mensagens : '+error);
+            });
+        },
+        memu_midia_show_hide:function(){
+            this.$refs.thisMenuMidias.memu_midia_show_hide();
         },
         wapp_muda_aba:function(isso){
             
@@ -714,17 +787,193 @@ export default {
             }
             x[isso].classList.add("active");
         },
-        wapp_select_talk:function(idn, nome, fone, img){
+        wapp_dropz_removeall_files:function(){
+            this.$refs.thisDropZone.remove_all_files()
+        },
+        wapp_select_talk:function(idn, nome, fone, img, apikey, canal, funil, segmentacoes){
+        
             var contatox=document.getElementsByClassName("contato-profile-list");
             var i;
             for(i=0;i<contatox.length;i++){
                 contatox[i].classList.remove("active");
             }
+            this.POP_change_places_showHide_popover(0);
+            
             document.getElementById("current-contato-img").src=img;
             document.getElementById("current-contato-nome").innerText=nome;
             document.getElementById("current-contato-fone").innerText=fone;
             document.getElementById("contato-"+idn).classList.add("active");
+            document.getElementById("contato_idn").value=idn;
+            document.getElementById("contato_fone").value=fone;
+            document.getElementById("contato_nome").value=nome;
+            document.getElementById("user_nome").value=$user_nome;
+            document.getElementById("user_nome").value=$user_nome;
+            document.getElementById("contato_canal").value=canal;
+            document.getElementById("contato_funil").value=funil;
+            document.getElementById("contato_segmentacoes").value=segmentacoes;
+            if(canal!=undefined){
+                document.getElementById("drop_canal_label").innerHTML=canal;
+                document.getElementById("drop_canal_mini_label").innerHTML=canal;
+            }
+            if(funil!=undefined){
+                document.getElementById("drop_funil_label").innerHTML=funil;
+                document.getElementById("drop_funil_mini_label").innerHTML=funil;
+            }
+
+            var segx=segmentacoes.split('|')
+
+            setTimeout(() => {
+                var segmclass=document.getElementsByClassName('segm-checkbox');
+                for(i=0;i<segmclass.length;i++){
+                    segmclass[i].checked=false;
+                }
+
+                for(i=0;i<segx.length;i++){
+                    document.getElementById('segm_'+segx[i]).checked=true;
+                    document.getElementById('segm_v_'+segx[i]).checked=true;
+                    
+                }
+            }, 500);
+
+
+            $contato_idn=idn;
+            $contato_nome=nome;
+            $contato_fone=fone;
+            $contato_img=img;
+            $contato_apikey=apikey;
+
+            document.getElementById('contato_idn').value=$contato_idn;
+
+            this.wapp_load_msgs($user_idn, $contato_idn);
+            this.wapp_show_hide_dropzone('hide');
+            this.wapp_dropz_removeall_files();
+
 //            alert(document.getElementById("contato-"+idn).innerText)
+        },
+        wapp_show_hide_emoticon:function(){
+
+            var area_emoticon=document.getElementById('chat-area-emoticons');
+            var ico_dropzone= document.getElementById('msg_ico_dropzone')
+            var ico_foguete= document.getElementById('msg_ico_foguete')
+
+            if(area_emoticon.style.display=="none" || area_emoticon.style.display==""){
+                ico_dropzone.style.display='none';
+                ico_foguete.style.display='none';
+                area_emoticon.style.opacity=0;
+                area_emoticon.style.height="0px";
+                area_emoticon.style.top="calc(100vh - 180px)";
+                area_emoticon.style.display="flex";
+                setTimeout(() => {
+                    area_emoticon.style.top="calc(100vh - 330px)";
+                    area_emoticon.style.opacity=1;
+                    area_emoticon.style.height="150px";
+                }, 300);
+            }else{
+                ico_dropzone.style.display='block';
+                ico_foguete.style.display='block';
+                area_emoticon.style.top="calc(100vh - 320px)";
+                setTimeout(() => {
+                    area_emoticon.style.height="0";
+                    area_emoticon.style.opacity=0;
+                    area_emoticon.style.top="calc(100vh - 180px)";
+                }, 200);
+                setTimeout(() => {
+                    area_emoticon.style.display="none";
+                }, 1400);
+
+            }
+
+        },
+        wapp_send_msg:function(){
+            var body=document.getElementById('msg_to_send').value;
+            /*
+            var dropzone=this.$refs.thisDropZone;
+
+            dropzone.wapp_set_dropzone_url($user_idn+''+$contato_idn);
+            var url=$host+':6001/wapp/msgs?sender='+$user_idn+'&sender_nome='+$user_nome+'&sender_fone='+$user_fone+'&idn_contato='+$contato_idn+'&apikey='+$contato_apikey+'&msgto='+$contato_fone+'&tipo_msg=saida&crud=add&body='+body+"&nome="+$contato_nome
+
+            dropzone.wap_post_files(url);
+            console.log(($contato_idn + $contato_nome + $contato_fone + $contato_img + $contato_apikey));
+            */
+                
+
+            if(body=="") return;
+            document.getElementById('msg_to_send').value="";
+            
+            axios({
+                method: 'post',
+                url: $host+':6001/wapp/msgs?sender='+$user_idn+'&sender_nome='+$user_nome+'&sender_fone='+$user_fone+'&idn_contato='+$contato_idn+'&apikey='+$contato_apikey+'&msgto='+$contato_fone+'&tipo_msg=saida&crud=add&body='+body+"&nome="+$contato_nome
+            })
+            .then((response) => {
+                
+                setTimeout(() => {
+                    var elem = document.getElementById('chat-area-msgs');
+                    this.wapp_load_msgs();
+                    setTimeout(() => {
+                        elem.scrollTop = elem.clientHeight+20000;
+                    }, 500);
+                }, 300);
+                
+                console.log((response+$contato_idn + $contato_nome + $contato_fone + $contato_img + $contato_apikey));
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+            document.getElementById('chat-area-emoticons').style.display="none";
+            document.getElementById('msg_ico_dropzone').style.display="block";
+            document.getElementById('msg_ico_foguete').style.display="block";
+            
+        },
+        wapp_show_hide_dropzone: function(what){
+            var dropzone=document.getElementById('area-dropzone');
+            var ico_emoticon= document.getElementById('msg_ico_emoticon')
+            var ico_foguete= document.getElementById('msg_ico_foguete')
+            var send_msg= document.getElementById('chat-area-msgs-send')
+
+            if(what!=undefined){
+                dropzone.style.display='none';
+                ico_emoticon.style.display='block';
+                ico_foguete.style.display='block';
+                send_msg.style.display='flex';
+                return;
+            }
+            
+            if(dropzone.style.display=='block'){
+                dropzone.style.display='none';
+                ico_emoticon.style.display='block';
+                ico_foguete.style.display='block';
+                send_msg.style.display='flex';
+            }else{
+                dropzone.style.display='block'
+                ico_emoticon.style.display='none';
+                ico_foguete.style.display='none';
+                send_msg.style.display='none';
+            }
+            this.$refs.thisMenuMidias.memu_midia_show_hide('none');
+        },
+        close_all_dropdowns: function(){
+
+            
+            if (document.getElementById('menu-show-hide').checked) document.getElementById('btn-show-hide-main-menu').click();
+            document.getElementById('search-lado-direito').style.display='none';
+            document.getElementById('btn-show-seach-lado-direito').style.display='block';
+            document.getElementById('filtro_dir_bico').style.display='none';
+            document.getElementById('filtro_dir_lista').style.display='none';
+            
+            var dd=document.getElementsByClassName('dropdown-body');
+            var i;
+            for(i=0;dd.length;i++){
+                dd[i].style.display="none";
+            }
+            ///document.getElementById('menu-show-hide').checked=false;
+            
+        },
+        clear_text(isso){
+            document.getElementById(isso).value="";
+            if(isso=="look_for_msg")
+                this.wapp_load_msgs()
+            else
+                this.wapp_load_contatos_lookup()
         },
         closeMenu: function(){
             this.menuActive = false;
@@ -732,22 +981,30 @@ export default {
         
     },
     async mounted() {
-        this.dataSrc = "../assets/js/header.js";
         var el=document.getElementsByClassName("mini-menu-item-cell")
+        document.getElementById("host").value=$host;
+        document.getElementById("cliente_idn").value=$cliente_idn;
+        document.getElementById("user_idn").value=$user_idn;
+        document.getElementById("user_fone").value=$user_fone;
         var i=0;
         for(i=0;i<el.length;i++){
             el[i].classList.remove("active");
         }
         el[1].classList.add("active");
-        document.getElementById('btn-show-hide-main-menu').click();
-        this.wapp_load_contatos('ativo');
-
-    },
-    async created() {
-        this.wapp_load_user();
         
-    }
+        if (document.getElementById('menu-show-hide').checked) document.getElementById('btn-show-hide-main-menu').click();
+        this.wapp_load_user();
 
+        setTimeout(() => {
+            this.wapp_load_contatos('ativo');
+        }, 100);
+
+        setInterval( () => {
+            this.wapp_load_msgs();
+        },10000)
+        
+
+    }
 }
 
 

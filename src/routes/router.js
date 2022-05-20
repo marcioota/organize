@@ -1,9 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueMeta from 'vue-meta'
+import AxiosPlugin from 'vue-axios-cors';
+
 
 Vue.use(VueMeta)
 Vue.use(VueRouter);
+Vue.use(AxiosPlugin);
 
 import Chat from '@/pages/Chat';
 import Painel from '@/pages/Painel';
@@ -12,6 +15,7 @@ import crm from '@/pages/Crm';
 import test from '@/pages/Test';
 import app from '@/pages/app';
 import contato from '@/pages/Contato';
+import meupai from '@/pages/MeuPai';
 
 const routes = [{
     path:'/',
@@ -20,6 +24,10 @@ const routes = [{
 {
     path:'/Painel',
     component: Painel
+},
+{
+    path:'/meupai',
+    component: meupai
 },
 {
     path:'/mkt',

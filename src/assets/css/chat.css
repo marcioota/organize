@@ -55,6 +55,7 @@ main{
 .esys-aba.active{
     border-bottom: 4px solid darkblue;
 }
+
 /* SEARCH BOX */
 .search-box{
     background:white;
@@ -72,7 +73,7 @@ main{
 .search-box input{
     font-size:9pt;
     width: 80%;
-    color: var(--color-roxo-claro)
+    color: var(--color-roxo)
 }
 .search-box i{
     color: var(--color-roxo) !important;
@@ -502,6 +503,7 @@ main{
     display: flex;
     padding-left:40px;
     padding-right:40px;
+    z-index: 11;
 }
 
 #chat-area-msgs-send a{
@@ -542,17 +544,75 @@ main{
 }
 .popover-header{
     display: flex;
-    background: var(--color-mini-menu-roxo);
+    background: var(--color-roxo);
 }
-.popover-header i{
+
+.popover-header-tall{
+    display: flex;
+    flex-direction: column;
+    background: var(--color-roxo);
+}
+.popover-header i, .popover-header-tall i{
     position: relative;
     color:white;
     top: -1px;
     padding: 5px 10px 10px 0px;
 
 }
+#user-anexos-docs a{
+    display: flex;
+    color: var(--color-roxo);
+    padding: 5px;
+    font-size: 10pt;
+    background: var(--color-cinza);
+    font-weight: 600;
+}
+.file-grupo{
+    background: #fff;
+    border: 2px solid #ddd;
+    margin:5px;
+    border-radius: 10px;
+}
+.file-part-name{
+    padding-top:7px;
+    width:290px;
+    overflow:hidden;
+    white-space: nowrap;
+    margin-left:10px;
+    
+}
+.file-stat-info{
+    background: #fff;
+    display: flex;
+    padding: 3px 13px 3px 13px;
+    font-size: 10pt;
+    justify-content: space-between;
+    color: #888;
+    font-weight: 600;
+}
 
+.user-link-grupo{
+    background: #fff;
+    padding-top:7px;
+    width:330px;
+    overflow:hidden;
+    white-space: nowrap;
+    margin-left:10px;
+    border-radius: 10px;
+    border: 0px solid blue;
+    padding: 5px 15px 5px 15px;
+    margin: 10px;    
+    box-shadow: 3px 1px 5px rgba(3, 3, 3, 0.3);
+    font-weight: 100;
+    font-size: 10pt;
+}
 
+a:hover{
+    text-decoration: none;
+}
+.user-img-midias{
+    height: 100px;
+}
 /*MENUS */
 #menu-chat, #menu-chat-2{
     position: fixed;
@@ -613,7 +673,13 @@ main{
     padding: 5px 5px 5px 5px;
     cursor: pointer;
 }
-
+.contato-profile-list u{
+    color:red;
+}
+.contato-profile-text{
+    color: blue;
+    text-decoration: dashed;
+}
 .contato-profile-list.active{
     background: var(--color-roxo-claro-2);
 }
@@ -660,10 +726,34 @@ main{
 
 
 /*  CLIENT-PROFILE */
+
+#menu-chat-1-2{
+    border:0px solid red;
+}
+#botoes-genericos{
+    height: 35px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    justify-content:right;
+    margin-left: 0px;
+    margin-right: 1px;
+    min-width:250px;
+    z-index:343020343;
+    border:0px solid red;
+}
+
+#client-block{
+    display: flex;
+    border:0px solid blue;
+    align-content: space-between;
+}
 #client-profile{
     display: flex;
-    width:300px;
+    width:200px;
     border:0px solid red;
+    cursor: pointer;
 
 }
 #client-profile div{
@@ -707,20 +797,29 @@ main{
     border:1px solid red;
     width:30px
 }
-
-#botoes-genericos{
-    width:35%;
-    height: 35px;
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    justify-content:flex-start;
-    margin-right: 10px;
-    min-width:250px;
-    z-index:343020343;
+#msg_ico_send img{
+    margin-top: 7px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width:25px !important;
+    height: 25px !important;
+}
+.foguete-azul{
+    background-image: url('/src/assets/imgs/foguete.png');
+    background-repeat: no-repeat;
+    background-size: 130px 130px;
+    border:1px solid blue;
+    width:150px !important;
+    height:150px !important;
 }
 
+.clear-this{
+    font-size:9pt;
+    margin-right: 4px;
+    position:relative;
+    top: 8px;
+    cursor: pointer;
+}
 #botoes-genericos .combo-like-grp{
     margin:10px;
 }
@@ -775,7 +874,7 @@ main{
 }
 
 #pop-over-dados-usuario .popover-header{
-    background-color: purple;
+    background-color: var(--color-roxo);
 }
 #pop-over-financeiro .popover-header{
     background: darkgreen;
@@ -818,3 +917,145 @@ main{
     border: 0 none;
     outline: 0;
 } 
+
+/*MENSAGENS*/
+
+.mensagem-list{
+    margin:10px;
+}
+
+.mensagem-text-entrada, .mensagem-text-saida{
+    display: flex;
+    padding: 10px 5px 5px 5px;
+}
+
+.mensagem-text-saida{
+    justify-content: right;
+}
+
+.mensagem-text-entrada .msg-baloon, .mensagem-text-saida .msg-baloon {
+    border:1px solid #ccc;
+    font-size: 12pt;
+    padding: 10px 15px 1px 15px;
+    box-shadow: 1px 1px 10px rgba(3, 3, 3, 0.3);
+    display: flex;
+}
+
+.mensagem-text-saida .msg-baloon {
+    background: var(--color-roxo-claro-2) !important;
+    border-radius: 0px 10px 10px 10px ;
+}
+
+.mensagem-text-entrada .msg-baloon {
+    background: var(--color-fundo);
+    border-radius: 10px 0px 10px 10px ;
+}
+.mensagem-entrega{
+    font-size: 8pt;
+    display: flex;
+    justify-items: end;
+    justify-content: flex-end;
+    margin-left: 8px;
+    color: #aaa;
+}
+.mensagem-entrega i{
+    position: relative;
+    top:-4px;
+    font-size: 12pt;
+    margin-left: 5px;
+}
+
+.mensagem-entrega .font-blue{
+    color: dodgerblue;
+}
+
+.hidden{
+    display: none;
+}
+
+.classe-mensagens hr{
+    margin-top: 60px;
+}
+
+.classe-mensagens u{
+    color: red;
+}
+
+.classe-mensagens h1{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.classe-mensagens h1 span{
+    background:white;
+    position: relative;
+    top:-35px;
+    padding-left:20px;
+    padding-right:20px;
+}
+.classe-mensagens h1 i{
+    font-size: 10pt;
+    color:white;
+    position: relative;
+    top:-15px;
+    left: -10px;
+    padding:5px 15px 5px 15px;
+    margin-left:20px;
+    border-radius: 15px;
+    background: var(--color-roxo);
+}
+
+.origem-instagram, .origem-facebook, .origem-whatsapp{
+    position: relative;
+    top:-20px;
+    left: 40px;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    height:40px;
+    width: 40px;
+    margin-bottom: -100px;
+    }
+.origem-instagram{
+    background-image: url('../imgs/origem-insta.png');
+    background-size: 40px 40px;
+}
+.origem-facebook{
+    background-image: url('../imgs/origem-face.png');
+}
+.origem-whatsapp{
+    background-image: url('../imgs/origem-whats.png');
+}
+
+.chat-img{
+    max-width:250px;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.img-midia{
+    max-height:200px;
+
+}
+.msg-baloon-detalhe{
+    display: flex;
+    flex-direction: column;
+}
+.msg-baloon-detalhe .col-md-12{
+    margin-bottom: 20px;
+    display: flex;
+    border: 0px solid red;
+}
+.msg-baloon-detalhe .col-md-12 .col-md-6{
+    text-align: center;
+}
+
+.user-segmentos{
+    background:var(--color-roxo);
+    color:white;
+    padding: 3px 10px 3px 10px;
+    margin: 5px;
+    border-radius: 15px;
+    font-size: 10pt;
+
+}

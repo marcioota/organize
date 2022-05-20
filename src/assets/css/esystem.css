@@ -295,16 +295,25 @@ body {
     background: #a7efdb;
     color: #5d57b7;
     border:1px solid #5d57b7;
-    width: 85px;
+    min-width: 85px;
   }
-.creme{
+  .verde-claro i{
+    margin-right: -10px !important;
+  }
+
+  .creme{
   background: #fdf4df;
   color: #e2a953;
   border:1px solid #e2a953;
-  width: 115px;
+  min-width: 115px;
 
 }
-  .roxo-claro{
+
+.creme i{
+  margin-right: -10px !important;
+}
+
+.roxo-claro{
     background: #ebebfe;
     color: #5d57b7;
     border:1px solid #5d57b7;

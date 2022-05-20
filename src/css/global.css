@@ -7,7 +7,7 @@
     --color-text-dark:#3D3D3D;
     --color-cabecalho-azul: #312f52;
     --color-mini-menu-roxo: #5d57b7;
-
+    --color-pink: #aa44cf;
     --color-verde-escuro: #81b988;
     --color-roxo: #5d57b7;
     --color-roxo-claro: #d2c7f2;
@@ -67,4 +67,14 @@
 
  .filter-green{
     fill:red
+}
+
+
+#badge{
+    background: black !important;
+    position: fixed;
+    color: white;
+    white-space: nowrap;
+    padding: 5px 15px 5px 15px;
+    border-radius: 15px;
 }
